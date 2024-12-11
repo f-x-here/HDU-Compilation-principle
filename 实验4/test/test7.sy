@@ -1,0 +1,10 @@
+void print(int x, float y) {
+    // I/O operations would be handled by runtime library
+}
+
+int main() {
+    float f = 3.14;
+    int i = (int)f;  
+    print(i, f);
+    return 0;
+}

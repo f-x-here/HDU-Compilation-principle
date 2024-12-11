@@ -1,0 +1,8 @@
+void print(int x, float y) {
+    // I/O operations would be handled by runtime library
+}
+
+int main() {
+    print(5, 2.5);
+    return 0;
+}

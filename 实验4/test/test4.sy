@@ -1,0 +1,13 @@
+void print(int x) {
+    // I/O operations would be handled by runtime library
+}
+
+int main() {
+    int x = 10;
+    if (x > 5) {
+        print(x);
+    } else {
+        print(5);
+    }
+    return 0;
+}

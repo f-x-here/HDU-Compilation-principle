@@ -84,10 +84,10 @@ ConstDecl_R     :ConstDecl_R COMMA ConstDef
 
 
 
-ConstDef        :ID VecDef_R EQ ConstInitVal
+ConstDef        :ID VecDef_R ASSIGN ConstInitVal
                 ;
 
-VecDef_R     :VecDef_R LS ConstExp RS
+VecDef_R        :VecDef_R LS ConstExp RS
                 |/*empty*/
                 ;
 
@@ -263,6 +263,5 @@ int main(int argc, char **argv) {
         yyparse();
         fclose(file);
     }
-    printf("Pass Success!\n");
     return 0;
 }

@@ -1,0 +1,7 @@
+int main() {
+    int a = 5, b = 3;
+    if (a > b && a + b > 7) {
+        return 1 ;
+    }
+    return 0;
+}
