@@ -36,8 +36,6 @@
         LB
         RB
         CONST
-        INT
-        FLOAT
         VOID
         IF
         ELSE
@@ -50,6 +48,10 @@
         ID
         AND
         OR
+
+%token <INTNUM>INT
+%token <FLOATNUM>FLOAT
+
 
 //associations 运算符优先级定义越早出现的优先级越低
 %right ASSIGN //赋值优先级最低
@@ -261,6 +263,6 @@ int main(int argc, char **argv) {
         yyparse();
         fclose(file);
     }
-
+    printf("Pass Success!\n");
     return 0;
 }
