@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include <string>
 #include <map>
@@ -378,6 +379,17 @@ void showTable()
 	}
 }
 
+string OutputStack(stack<char> S)
+{
+	string result="";
+	while(!S.empty()) //(a,a,a)
+	{
+		result=result+S.top();
+		S.pop();
+	}
+	return result;
+}
+
 bool LL1Solve(string expr)
 {
 	stack<char>cur;
@@ -391,6 +403,8 @@ bool LL1Solve(string expr)
 	char curSymbol, top;
 	string production;
 	regex rex("ε");
+	cout<<setw(15)<<"Stack"<<setw(15)<<"Input"<<setw(15)<<"Inffer"<<endl;
+	cout<<setw(15)<<OutputStack(cur)<<setw(15)<<OutputStack(wait)<<setw(15)<<" "<<endl;
 	while (!cur.empty())
 	{
 		top = cur.top();
@@ -401,6 +415,7 @@ bool LL1Solve(string expr)
 			if (top == curSymbol)
 			{
 				wait.pop();
+				cout<<setw(15)<<OutputStack(cur)<<setw(15)<<OutputStack(wait)<<'\t'<<top<<" matched"<<endl;
 			}
 			else
 			{
@@ -418,6 +433,7 @@ bool LL1Solve(string expr)
 					if(production[i]!='@')
 					cur.push(production[i]);
 				}
+				cout<<setw(15)<<OutputStack(cur)<<setw(15)<<OutputStack(wait)<<setw(15)<<M[{top, curSymbol}]<<endl;
 			}
 			else
 			{

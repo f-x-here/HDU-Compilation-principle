@@ -19,22 +19,22 @@ set<char> Firstsolve(char S)
     }
     if (islower(S))
     {
-        return {S};
+        return { S };
     }
     set<char> result;
     int flag = 0;
-    for (auto &it : sentences[S])
+    for (auto& it : sentences[S])
     {
         for (int i = 0; i < it.length(); i++)
         {
-            if (islower(it[i]) || it[i] == '@')
+            if (islower(it[i]) || it[i]=='@')
             {
                 result.insert(it[i]);
                 break;
             }
             else if (isupper(it[i]))
             {
-                for (auto &f : Firstsolve(it[i]))
+                for (auto& f : Firstsolve(it[i]))
                 {
                     if (f == '@')
                     {
@@ -66,7 +66,7 @@ set<char> Firstsolve(char S)
 
 void Follow()
 {
-    for (auto &it : sentences)
+    for (auto& it : sentences)
     {
         followSet[it.first] = {};
     }
@@ -77,9 +77,9 @@ void Follow()
     while (change)
     {
         change = false;
-        for (auto &it : sentences)
+        for (auto& it : sentences)
         {
-            for (auto &iit : it.second) // A -> BCD it.first : A   it.second : BCD
+            for (auto& iit : it.second) // A -> BCD it.first : A   it.second : BCD
             {
                 for (int i = 0; i < iit.length() - 1; i++)
                 {
@@ -91,12 +91,15 @@ void Follow()
                         if (isupper(iit[j]))
                         {
                             needAdd = false;
-                            for (auto &iiit : Firstsolve(iit[j]))
+                            for (auto& iiit : Firstsolve(iit[j]))
                             {
                                 if (iiit == '@')
                                 {
-                                    needAdd = true;
                                     cont = true;
+                                    if (j == iit.length() - 1)
+                                    {
+                                        needAdd = true;
+                                    }
                                 }
                                 else if (followSet[iit[i]].insert(iiit).second)
                                 {
@@ -105,7 +108,7 @@ void Follow()
                             }
                             if (needAdd) // follow(B)+=follow(A)
                             {
-                                for (auto &iiit : followSet[it.first])
+                                for (auto& iiit : followSet[it.first])
                                 {
                                     if (followSet[iit[i]].insert(iiit).second)
                                     {
@@ -116,17 +119,17 @@ void Follow()
                         }
                         else //终结符直接加
                         {
-                            if (followSet[iit[i]].insert(iit[i + 1]).second)
+                            if (followSet[iit[i]].insert(iit[j]).second)
                             {
                                 change = true;
                             }
                         }
-                        if(!cont)break; // first(B)无ε，跳出
+                        if (!cont)break; // first(B)无ε，跳出
                     }
                 }
                 if (isupper(iit[iit.length() - 1]))
                 {
-                    for (auto &iiit : followSet[it.first])
+                    for (auto& iiit : followSet[it.first])
                     {
                         if (followSet[iit[iit.length() - 1]].insert(iiit).second)
                         {
@@ -165,14 +168,14 @@ int main()
         }
         sentences[left].push_back(right);
     }
-    for (auto &it : sentences)
+    for (auto& it : sentences)
     {
         Firstsolve(it.first);
     }
-    for (auto &it : firstSet)
+    for (auto& it : firstSet)
     {
         cout << "First(" << it.first << ") = { ";
-        for (auto &itt : it.second)
+        for (auto& itt : it.second)
         {
             if (itt == '@')
             {
@@ -184,10 +187,10 @@ int main()
         cout << "}" << endl;
     }
     Follow();
-    for (auto &it : followSet)
+    for (auto& it : followSet)
     {
         cout << "Follow(" << it.first << ") = {";
-        for (auto &iit : it.second)
+        for (auto& iit : it.second)
         {
             cout << " " << iit;
         }
